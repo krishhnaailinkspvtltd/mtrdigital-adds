@@ -18,6 +18,38 @@
   'use strict';
 
   // ------------------------------------------------------------------------
+  // 0. THEME SWITCHER ENGINE (LIGHT / DARK THEME WITH PERSISTENCE)
+  // ------------------------------------------------------------------------
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('mtr-theme', theme);
+    } catch (e) {}
+    if (themeToggleIcon) {
+      themeToggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+  }
+
+  const savedTheme = (function () {
+    try {
+      return localStorage.getItem('mtr-theme') || 'light';
+    } catch (e) {
+      return 'light';
+    }
+  })();
+  applyTheme(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      applyTheme(current === 'light' ? 'dark' : 'light');
+    });
+  }
+
+  // ------------------------------------------------------------------------
   // 1. SCROLLED HEADER & PROGRESS BAR
   // ------------------------------------------------------------------------
   const header = document.getElementById('mainHeader');

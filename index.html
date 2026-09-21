@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Funnel+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- MTR Brand Design System Stylesheet (Cache-Busted v13.0.0) -->
-  <link rel="stylesheet" href="css/styles.css?v=13.0.0">
+  <!-- MTR Brand Design System Stylesheet (Cache-Busted v15.0.0) -->
+  <link rel="stylesheet" href="css/styles.css?v=15.0.0">
 </head>
 <body>
 
@@ -30,14 +30,15 @@
   <header class="mxd-header" id="mainHeader">
     <div class="mxd-container">
       <div class="header-inner">
-        <!-- Brand Logo -->
-        <a href="#hero" class="header-brand">
+        <!-- Brand Logo (Transparent & Highly Visible) -->
+        <a href="#hero" class="header-brand" aria-label="MTR Digital Marketing Agency">
           <div class="brand-logo-frame">
-            <img src="assets/logo.jpg" alt="MTR Logo" class="brand-logo-img">
+            <img src="assets/logo-mark-vibrant.png?v=14.0.0" alt="MTR Logo" class="brand-logo-img">
           </div>
+          <div class="brand-divider"></div>
           <div class="brand-name-wrap">
             <div class="brand-title">
-              MTR <span class="badge">GLOBAL</span>
+              DIGITAL MARKETING <span class="badge">AGENCY</span>
             </div>
             <span class="brand-subtitle">National & International</span>
           </div>
@@ -52,8 +53,13 @@
           <a href="#contact" class="nav-link">About</a>
         </nav>
 
-        <!-- Right Action Button & Rotating Badge -->
+        <!-- Right Action Button, Theme Switcher & Mobile Trigger -->
         <div class="header-cta-group">
+          <!-- Theme Switcher (Light / Dark Mode) -->
+          <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
+            <span id="themeToggleIcon">🌙</span>
+          </button>
+
           <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal" style="border:none;">
             <span>Say Hello</span>
             <span class="btn-icon">↗</span>
@@ -593,12 +599,15 @@
       <div class="footer-top-grid">
         <!-- Brand Bio Col -->
         <div>
-          <a href="#hero" class="header-brand">
+          <a href="#hero" class="header-brand" aria-label="MTR Digital Marketing Agency">
             <div class="brand-logo-frame">
-              <img src="assets/logo.jpg" alt="MTR Logo" class="brand-logo-img">
+              <img src="assets/logo-mark-vibrant.png?v=14.0.0" alt="MTR Logo" class="brand-logo-img">
             </div>
+            <div class="brand-divider"></div>
             <div class="brand-name-wrap">
-              <div class="brand-title">MTR GLOBAL</div>
+              <div class="brand-title">
+                DIGITAL MARKETING <span class="badge">AGENCY</span>
+              </div>
               <span class="brand-subtitle">National & International</span>
             </div>
           </a>
@@ -756,7 +765,7 @@
     </div>
   </div>
 
-  <!-- MTR Interaction Script (Cache-Busted v13.0.0) -->
-  <script src="js/app.js?v=13.0.0"></script>
+  <!-- MTR Interaction Script (Cache-Busted v15.0.0) -->
+  <script src="js/app.js?v=15.0.0"></script>
 </body>
 </html>

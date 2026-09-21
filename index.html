@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Funnel+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- MTR Brand Design System Stylesheet (Cache-Busted v15.0.0) -->
-  <link rel="stylesheet" href="css/styles.css?v=15.0.0">
+  <!-- MTR Brand Design System Stylesheet (Cache-Busted v16.0.0) -->
+  <link rel="stylesheet" href="css/styles.css?v=16.0.0">
 </head>
 <body>
 
@@ -55,6 +55,11 @@
 
         <!-- Right Action Button, Theme Switcher & Mobile Trigger -->
         <div class="header-cta-group">
+          <!-- Web Audio Micro-Haptics Sound Switcher -->
+          <button type="button" class="theme-toggle-btn" id="soundToggleBtn" aria-label="Toggle Audio Micro-Haptics" title="Toggle Audio Feedback">
+            <span id="soundToggleIcon">🔇</span>
+          </button>
+
           <!-- Theme Switcher (Light / Dark Mode) -->
           <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
             <span id="themeToggleIcon">🌙</span>
@@ -191,20 +196,32 @@
                 <span class="tag-pill">Algorithmic ROAS</span>
               </div>
             </div>
-            <div class="stack-card-right">
-              <svg class="stack-artwork-svg" viewBox="0 0 400 300">
-                <defs>
-                  <linearGradient id="brandBlueGlow" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#025bdd" stop-opacity="0.8"/>
-                    <stop offset="100%" stop-color="#00a2ff" stop-opacity="0.2"/>
-                  </linearGradient>
-                </defs>
-                <rect x="40" y="40" width="320" height="220" rx="20" fill="#0d1526" stroke="rgba(2,91,221,0.3)" stroke-width="1.5"/>
-                <path d="M 60 210 Q 150 180, 220 120 T 340 70" fill="none" stroke="#00a2ff" stroke-width="4"/>
-                <circle cx="340" cy="70" r="7" fill="#00a2ff"/>
-                <circle cx="220" cy="120" r="6" fill="#025bdd"/>
-                <circle cx="60" cy="210" r="6" fill="#fff"/>
-              </svg>
+            <div class="stack-card-right telemetry-card-box">
+              <div class="telemetry-header">
+                <span class="telemetry-title">NEURAL BID ENGINE // FREQ: 2,400 OPS</span>
+                <span class="telemetry-live-badge"><span class="pulse-dot"></span> LIVE</span>
+              </div>
+              <div class="telemetry-waveform-wrap">
+                <svg class="waveform-svg" viewBox="0 0 340 120" preserveAspectRatio="none">
+                  <path class="wave-grid-line" d="M 0 30 L 340 30 M 0 60 L 340 60 M 0 90 L 340 90" />
+                  <path class="wave-glow-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" />
+                  <path class="wave-main-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" />
+                </svg>
+              </div>
+              <div class="telemetry-stat-row">
+                <div class="t-stat">
+                  <span class="t-lbl">Algorithmic ROAS</span>
+                  <span class="t-val accent">6.24×</span>
+                </div>
+                <div class="t-stat">
+                  <span class="t-lbl">Bid Efficiency</span>
+                  <span class="t-val">+99.4%</span>
+                </div>
+                <div class="t-stat">
+                  <span class="t-lbl">CAPI Latency</span>
+                  <span class="t-val">&lt;40ms</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -223,16 +240,44 @@
                 <span class="tag-pill">Synthetic Queries</span>
               </div>
             </div>
-            <div class="stack-card-right">
-              <svg class="stack-artwork-svg" viewBox="0 0 400 300">
-                <circle cx="200" cy="150" r="80" fill="none" stroke="#00a2ff" stroke-width="2" stroke-dasharray="6 6"/>
-                <circle cx="200" cy="150" r="40" fill="rgba(2,91,221,0.2)"/>
-                <circle cx="200" cy="150" r="12" fill="#025bdd"/>
-                <circle cx="120" cy="150" r="6" fill="#fff"/>
-                <circle cx="280" cy="150" r="6" fill="#fff"/>
-                <circle cx="200" cy="70" r="6" fill="#fff"/>
-                <circle cx="200" cy="230" r="6" fill="#fff"/>
-              </svg>
+            <div class="stack-card-right telemetry-card-box">
+              <div class="telemetry-header">
+                <span class="telemetry-title">LLM CITATION GRAPH // RADAR</span>
+                <span class="telemetry-live-badge"><span class="pulse-dot"></span> 100% VISIBLE</span>
+              </div>
+              <div class="radar-visual-wrap">
+                <div class="radar-scan-beam"></div>
+                <div class="radar-ring r1"></div>
+                <div class="radar-ring r2"></div>
+                <div class="radar-ring r3"></div>
+                <!-- LLM Nodes -->
+                <div class="radar-node node-chatgpt" title="ChatGPT-4o: #1 Recommended">
+                  <span class="node-dot"></span>
+                  <span class="node-name">ChatGPT (99.4%)</span>
+                </div>
+                <div class="radar-node node-perplexity" title="Perplexity Pro: Top Citation">
+                  <span class="node-dot"></span>
+                  <span class="node-name">Perplexity (#1)</span>
+                </div>
+                <div class="radar-node node-google" title="Google AI Overview: Dominant">
+                  <span class="node-dot"></span>
+                  <span class="node-name">Google AEO</span>
+                </div>
+                <div class="radar-node node-claude" title="Claude 3.5: Sovereign Source">
+                  <span class="node-dot"></span>
+                  <span class="node-name">Claude (96.8%)</span>
+                </div>
+              </div>
+              <div class="telemetry-stat-row">
+                <div class="t-stat">
+                  <span class="t-lbl">Search Share</span>
+                  <span class="t-val accent">84.6%</span>
+                </div>
+                <div class="t-stat">
+                  <span class="t-lbl">LLM Citations</span>
+                  <span class="t-val">3,820/wk</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -251,12 +296,43 @@
                 <span class="tag-pill">Neuromarketing</span>
               </div>
             </div>
-            <div class="stack-card-right">
-              <svg class="stack-artwork-svg" viewBox="0 0 400 300">
-                <polygon points="120,50 280,50 240,150 160,150" fill="rgba(2,91,221,0.25)" stroke="#025bdd" stroke-width="2"/>
-                <polygon points="160,150 240,150 220,240 180,240" fill="rgba(0,162,255,0.2)" stroke="#00a2ff" stroke-width="2"/>
-                <circle cx="200" cy="240" r="8" fill="#00a2ff"/>
-              </svg>
+            <div class="stack-card-right telemetry-card-box">
+              <div class="telemetry-header">
+                <span class="telemetry-title">NEUROMARKETING HEATMAP // FUNNEL</span>
+                <span class="telemetry-live-badge"><span class="pulse-dot"></span> 0.42s SPEED</span>
+              </div>
+              <div class="funnel-heatmap-wrap">
+                <div class="heatmap-col">
+                  <span class="h-step">01. Landing</span>
+                  <div class="h-bar"><div class="h-fill" style="width: 100%;"></div></div>
+                  <span class="h-metric">100% Traffic</span>
+                </div>
+                <div class="heatmap-col">
+                  <span class="h-step">02. Intent Hook</span>
+                  <div class="h-bar"><div class="h-fill" style="width: 78%;"></div></div>
+                  <span class="h-metric">78.4% Cognitive Hook</span>
+                </div>
+                <div class="heatmap-col">
+                  <span class="h-step">03. Checkout Flow</span>
+                  <div class="h-bar"><div class="h-fill" style="width: 56%;"></div></div>
+                  <span class="h-metric">56.1% Zero Friction</span>
+                </div>
+                <div class="heatmap-col">
+                  <span class="h-step">04. Sovereign Close</span>
+                  <div class="h-bar"><div class="h-fill highlight" style="width: 38%;"></div></div>
+                  <span class="h-metric accent">+34.2% Net Lift</span>
+                </div>
+              </div>
+              <div class="telemetry-stat-row">
+                <div class="t-stat">
+                  <span class="t-lbl">Checkout Drop</span>
+                  <span class="t-val accent">-62.5%</span>
+                </div>
+                <div class="t-stat">
+                  <span class="t-lbl">AOV Expansion</span>
+                  <span class="t-val">+41.8%</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -275,14 +351,34 @@
                 <span class="tag-pill">APAC Expansion</span>
               </div>
             </div>
-            <div class="stack-card-right">
-              <svg class="stack-artwork-svg" viewBox="0 0 400 300">
-                <ellipse cx="200" cy="150" rx="120" ry="70" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-                <ellipse cx="200" cy="150" rx="70" ry="120" fill="none" stroke="#00a2ff" stroke-width="2" stroke-dasharray="8 8"/>
-                <circle cx="160" cy="120" r="6" fill="#025bdd"/>
-                <circle cx="240" cy="170" r="6" fill="#00a2ff"/>
-                <circle cx="200" cy="150" r="8" fill="#fff"/>
-              </svg>
+            <div class="stack-card-right telemetry-card-box">
+              <div class="telemetry-header">
+                <span class="telemetry-title">CROSS-BORDER ORCHESTRATOR</span>
+                <span class="telemetry-live-badge"><span class="pulse-dot"></span> MULTI-REGION</span>
+              </div>
+              <!-- Interactive Region Selector -->
+              <div class="region-selector-pills" id="regionPills">
+                <button type="button" class="region-pill active" data-cur="USD" data-symbol="$" data-rate="1.0" data-market="North America (US/CA)">USD ($)</button>
+                <button type="button" class="region-pill" data-cur="AED" data-symbol="AED " data-rate="3.67" data-market="UAE & GCC (Dubai/Riyadh)">AED (د.إ)</button>
+                <button type="button" class="region-pill" data-cur="GBP" data-symbol="£" data-rate="0.79" data-market="United Kingdom (London)">GBP (£)</button>
+                <button type="button" class="region-pill" data-cur="EUR" data-symbol="€" data-rate="0.92" data-market="European Union (Paris/Berlin)">EUR (€)</button>
+              </div>
+              <div class="region-telemetry-display">
+                <div class="region-meta">
+                  <span class="r-market" id="regionMarket">Target: North America (US/CA)</span>
+                  <span class="r-status">Tax & Regulatory Compliant</span>
+                </div>
+                <div class="region-calc-box">
+                  <div class="r-field">
+                    <span class="r-k">Scaled Monthly Pipeline</span>
+                    <span class="r-v accent" id="regionPipeline">$1,480,000</span>
+                  </div>
+                  <div class="r-field">
+                    <span class="r-k">Cross-Border ROAS Target</span>
+                    <span class="r-v" id="regionRoas">5.8× Blended</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -466,6 +562,88 @@
               <span style="font-family: var(--font-mono); font-size: 1.2rem; color: var(--accent);">
                 14 INTERNATIONAL TERRITORIES ↗
               </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Before/After Performance Benchmark (Split Slider) -->
+        <div class="benchmark-container">
+          <div class="benchmark-head">
+            <div class="mxd-subtitle-pill">
+              <span class="dot"></span>
+              <span>VERIFIED TRANSFORMATION // HEAD-TO-HEAD</span>
+            </div>
+            <h3 class="benchmark-title">Legacy Ad Agency vs. MTR Autonomous AI</h3>
+            <p class="benchmark-desc">Drag the interactive slider or click sector presets to inspect the measured performance delta across sovereign enterprise accounts.</p>
+            
+            <div class="benchmark-presets" id="benchmarkPresets">
+              <button type="button" class="bench-preset-pill active" data-preset="luxury">Haute Horlogerie & Luxury</button>
+              <button type="button" class="bench-preset-pill" data-preset="fintech">Institutional FinTech</button>
+              <button type="button" class="bench-preset-pill" data-preset="biotech">Global D2C BioTech</button>
+            </div>
+          </div>
+
+          <div class="split-slider-wrap" id="splitSliderWrap">
+            <!-- Underneath: Before Side -->
+            <div class="split-side split-before">
+              <div class="split-badge-tag tag-before">LEGACY AGENCY MODEL</div>
+              <div class="split-inner-box">
+                <div class="split-stats-grid">
+                  <div class="s-metric">
+                    <span class="s-val" id="beforeRoas">1.8×</span>
+                    <span class="s-lbl">Blended ROAS</span>
+                  </div>
+                  <div class="s-metric">
+                    <span class="s-val" id="beforeCac">$148</span>
+                    <span class="s-lbl">Blended CAC</span>
+                  </div>
+                  <div class="s-metric">
+                    <span class="s-val" id="beforeLag">12-24h</span>
+                    <span class="s-lbl">Attribution Lag</span>
+                  </div>
+                </div>
+                <ul class="split-list-features">
+                  <li><span class="cross">✕</span> Fragmented manual keyword bidding & wasted budget</li>
+                  <li><span class="cross">✕</span> Zero presence inside ChatGPT, Claude, & Perplexity</li>
+                  <li><span class="cross">✕</span> Generic landing pages with 68% mobile drop-off</li>
+                  <li><span class="cross">✕</span> Single-currency domestic campaigns with no localization</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Overlaid: After Side (Clipped dynamically by width) -->
+            <div class="split-side split-after" id="splitAfterLayer">
+              <div class="split-badge-tag tag-after">MTR SOVEREIGN AI ATELIER</div>
+              <div class="split-inner-box">
+                <div class="split-stats-grid">
+                  <div class="s-metric highlight">
+                    <span class="s-val accent" id="afterRoas">6.2×</span>
+                    <span class="s-lbl">Verified ROAS (+244%)</span>
+                  </div>
+                  <div class="s-metric highlight">
+                    <span class="s-val accent" id="afterCac">$42</span>
+                    <span class="s-lbl">Target CAC (-71.6%)</span>
+                  </div>
+                  <div class="s-metric highlight">
+                    <span class="s-val accent" id="afterLag">&lt;40ms</span>
+                    <span class="s-lbl">Real-Time CAPI Feedback</span>
+                  </div>
+                </div>
+                <ul class="split-list-features">
+                  <li><span class="check">✓</span> Neural bid pacing with sub-second algorithmic arbitrage</li>
+                  <li><span class="check">✓</span> #1 LLM citation authority and search graph monopoly</li>
+                  <li><span class="check">✓</span> Neuromarketing checkout architectures with +34% lift</li>
+                  <li><span class="check">✓</span> Multi-currency localized scale across UAE, US, UK, & EU</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Draggable Divider Handle -->
+            <div class="split-handle" id="splitHandle">
+              <div class="handle-line"></div>
+              <div class="handle-button" aria-label="Drag to compare before and after">
+                <span class="handle-icon">◂ ▸</span>
+              </div>
             </div>
           </div>
         </div>
@@ -765,7 +943,15 @@
     </div>
   </div>
 
-  <!-- MTR Interaction Script (Cache-Busted v15.0.0) -->
-  <script src="js/app.js?v=15.0.0"></script>
+  <!-- Bespoke Magnetic Trailing Cursor -->
+  <div class="custom-cursor" id="customCursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing">
+      <span class="cursor-label" id="cursorLabel"></span>
+    </div>
+  </div>
+
+  <!-- MTR Interaction Script (Cache-Busted v16.0.0) -->
+  <script src="js/app.js?v=16.0.0"></script>
 </body>
 </html>

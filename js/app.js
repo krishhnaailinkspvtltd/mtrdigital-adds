@@ -50,23 +50,105 @@
   }
 
   // ------------------------------------------------------------------------
-  // 1. SCROLLED HEADER & PROGRESS BAR
+  // 0B. WEB AUDIO API MICRO-HAPTIC AUDIO ENGINE
+  // ------------------------------------------------------------------------
+  let audioCtx = null;
+  let soundEnabled = (function () {
+    try {
+      return localStorage.getItem('mtr-sound') === 'true';
+    } catch (e) {
+      return false;
+    }
+  })();
+
+  const soundToggleBtn = document.getElementById('soundToggleBtn');
+  const soundToggleIcon = document.getElementById('soundToggleIcon');
+
+  function updateSoundIcon() {
+    if (soundToggleIcon) {
+      soundToggleIcon.textContent = soundEnabled ? '🔊' : '🔇';
+    }
+  }
+  updateSoundIcon();
+
+  function playMicroHaptic(freq = 1000, duration = 0.02, type = 'sine') {
+    if (!soundEnabled) return;
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {}
+  }
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      try {
+        localStorage.setItem('mtr-sound', soundEnabled ? 'true' : 'false');
+      } catch (e) {}
+      updateSoundIcon();
+      if (soundEnabled) {
+        playMicroHaptic(1200, 0.04);
+      }
+    });
+  }
+
+  // Hook micro-haptics to interactive clicks
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .region-pill, .bench-preset-pill, .sector-pill, .tag-pill')) {
+      playMicroHaptic(950, 0.025);
+    }
+  });
+
+  // ------------------------------------------------------------------------
+  // 1. SCROLLED HEADER & PROGRESS BAR & ACTIVE SECTION TRACKING
   // ------------------------------------------------------------------------
   const header = document.getElementById('mainHeader');
   const progressBar = document.getElementById('scrollProgressBar');
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.header-nav .nav-link');
 
   function handleScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-    // Header blur state
+    // Header dynamic island state
     if (header) {
-      if (scrollY > 40) {
+      if (scrollY > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
     }
+
+    // Active navigation link tracking
+    let currentSectionId = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 220;
+      const height = sec.offsetHeight;
+      if (scrollY >= top && scrollY < top + height) {
+        currentSectionId = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentSectionId}`) {
+        link.classList.add('active');
+      }
+    });
 
     // Progress bar width
     if (progressBar && docHeight > 0) {
@@ -394,7 +476,190 @@
   }
 
   // ------------------------------------------------------------------------
-  // 10. SMOOTH ANCHOR NAVIGATION
+  // 10. CROSS-BORDER REGION & CURRENCY ORCHESTRATOR
+  // ------------------------------------------------------------------------
+  const regionPills = document.querySelectorAll('.region-pill');
+  const regionMarket = document.getElementById('regionMarket');
+  const regionPipeline = document.getElementById('regionPipeline');
+  const regionRoas = document.getElementById('regionRoas');
+  const basePipelineUSD = 1480000;
+
+  if (regionPills.length > 0) {
+    regionPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        regionPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const cur = pill.getAttribute('data-cur');
+        const symbol = pill.getAttribute('data-symbol');
+        const rate = parseFloat(pill.getAttribute('data-rate')) || 1.0;
+        const market = pill.getAttribute('data-market');
+
+        const converted = Math.round(basePipelineUSD * rate);
+        const formatted = symbol + converted.toLocaleString();
+
+        if (regionMarket) regionMarket.textContent = `Target: ${market}`;
+        if (regionPipeline) {
+          regionPipeline.style.opacity = '0';
+          setTimeout(() => {
+            regionPipeline.textContent = formatted;
+            regionPipeline.style.opacity = '1';
+          }, 140);
+        }
+        if (regionRoas) {
+          regionRoas.textContent = cur === 'AED' ? '6.4× Blended' : cur === 'GBP' ? '5.9× Blended' : '5.8× Blended';
+        }
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // 11. INTERACTIVE BEFORE/AFTER PERFORMANCE BENCHMARK (SPLIT SLIDER)
+  // ------------------------------------------------------------------------
+  const splitSliderWrap = document.getElementById('splitSliderWrap');
+  const splitAfterLayer = document.getElementById('splitAfterLayer');
+  const splitHandle = document.getElementById('splitHandle');
+  const benchmarkPresets = document.querySelectorAll('.bench-preset-pill');
+
+  if (splitSliderWrap && splitAfterLayer && splitHandle) {
+    let isDragging = false;
+
+    function setSplitPosition(clientX) {
+      const rect = splitSliderWrap.getBoundingClientRect();
+      const offsetX = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      const percentage = Math.max(5, Math.min(95, (offsetX / rect.width) * 100));
+      splitAfterLayer.style.width = percentage + '%';
+      splitHandle.style.left = percentage + '%';
+    }
+
+    splitSliderWrap.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      setSplitPosition(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      setSplitPosition(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch support
+    splitSliderWrap.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      if (e.touches[0]) setSplitPosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      if (e.touches[0]) setSplitPosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Sector Benchmark Presets
+    const benchmarkData = {
+      luxury: {
+        before: { roas: '1.8×', cac: '$148', lag: '12-24h' },
+        after: { roas: '6.2×', cac: '$42', lag: '<40ms' }
+      },
+      fintech: {
+        before: { roas: '2.1×', cac: '$380', lag: '48h+' },
+        after: { roas: '7.4×', cac: '$95', lag: '<25ms' }
+      },
+      biotech: {
+        before: { roas: '1.9×', cac: '$84', lag: '24h' },
+        after: { roas: '5.8×', cac: '$26', lag: '<35ms' }
+      }
+    };
+
+    const bRoas = document.getElementById('beforeRoas');
+    const bCac = document.getElementById('beforeCac');
+    const bLag = document.getElementById('beforeLag');
+    const aRoas = document.getElementById('afterRoas');
+    const aCac = document.getElementById('afterCac');
+    const aLag = document.getElementById('afterLag');
+
+    benchmarkPresets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        benchmarkPresets.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const presetKey = btn.getAttribute('data-preset');
+        const data = benchmarkData[presetKey] || benchmarkData.luxury;
+
+        if (bRoas) bRoas.textContent = data.before.roas;
+        if (bCac) bCac.textContent = data.before.cac;
+        if (bLag) bLag.textContent = data.before.lag;
+
+        if (aRoas) aRoas.textContent = data.after.roas;
+        if (aCac) aCac.textContent = data.after.cac;
+        if (aLag) aLag.textContent = data.after.lag;
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // 12. BESPOKE MAGNETIC TRAILING CURSOR
+  // ------------------------------------------------------------------------
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  const cursorLabel = document.getElementById('cursorLabel');
+
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dotX = mouseX;
+      dotY = mouseY;
+      cursorDot.style.left = `${dotX}px`;
+      cursorDot.style.top = `${dotY}px`;
+    }, { passive: true });
+
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      cursorRing.style.left = `${ringX.toFixed(2)}px`;
+      cursorRing.style.top = `${ringY.toFixed(2)}px`;
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    const hoverTargets = [
+      { sel: '.btn-anim, .open-consult-modal', label: 'SELECT' },
+      { sel: '.case-card', label: 'PROOF' },
+      { sel: '.service-card', label: 'EXPLORE' },
+      { sel: '.bench-preset-pill, .region-pill, .sector-pill', label: 'PRESET' },
+      { sel: '.split-handle', label: 'DRAG' }
+    ];
+
+    hoverTargets.forEach(({ sel, label }) => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorRing.classList.add('active');
+          if (cursorLabel) cursorLabel.textContent = label;
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorRing.classList.remove('active');
+          if (cursorLabel) cursorLabel.textContent = '';
+        });
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // 13. SMOOTH ANCHOR NAVIGATION
   // ------------------------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

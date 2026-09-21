@@ -1,11 +1,12 @@
 /* ==========================================================================
-   MTR DIGITAL MARKETING — NITSAN.AI INSPIRED DESIGN SYSTEM
-   Exact UI/UX, Typography, Stacking Cards, Marquee & Component Architecture
-   Reference: https://nitsan.ai/
+   MTR DIGITAL MARKETING — OFFICIAL BRAND DESIGN SYSTEM
+   Exact NITSAN.AI Architecture & Physics Calibrated to MTR Brand Colors
+   Brand Palette: Royal Electric Blue (#025bdd), Sky Cyan (#00a2ff), Deep Navy (#01269b)
+   Reference: https://nitsan.ai/ & assets/logo.jpg
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. DESIGN TOKENS & SYSTEM VARIABLES (FROM NITSAN.AI SOURCE)
+   1. DESIGN TOKENS & BRAND VARIABLES
    -------------------------------------------------------------------------- */
 :root {
   /* Typography */
@@ -29,37 +30,40 @@
   --_animspeed-slow: 0.6s;
   --_animbezier: cubic-bezier(0.23, 0.65, 0.74, 1.09);
 
-  /* Dark Theme Palette (NITSAN Default) */
-  --base: #161616;
-  --base-rgb: 22, 22, 22;
-  --base-tint: #1c1c1c;
-  --base-tint-card: #202022;
-  --base-shade: #0a0a0a;
+  /* Brand Dark Canvas Palette (Deep Midnight Slate/Navy) */
+  --base: #080d1a;
+  --base-rgb: 8, 13, 26;
+  --base-tint: #0e1628;
+  --base-tint-card: #121c32;
+  --base-shade: #050811;
   --base-opp: #faf7f6;
 
-  /* Signature Accents */
-  --accent: #ddf160;          /* Electric Lime / Chartreuse (Nitsan Primary) */
-  --accent-rgb: 221, 241, 96;
-  --accent-hover: #cbdf4e;
-  --additional: #9f8be7;      /* Digital Lavender / Violet (Nitsan Secondary) */
-  --additional-rgb: 159, 139, 231;
+  /* Official MTR Brand Color Tokens (From Logo) */
+  --accent: #025bdd;          /* Royal Electric Blue (Primary Logo Core) */
+  --accent-rgb: 2, 91, 221;
+  --accent-hover: #004ecc;
+  --accent-glow: rgba(2, 91, 221, 0.4);
+  
+  --additional: #00a2ff;      /* Sky Cyan Accent (From Logo "AGENCY" & Arrow) */
+  --additional-rgb: 0, 162, 255;
+  --additional-navy: #01269b; /* Deep Navy Shadow (From Arrow Fold) */
 
   /* Text Colors */
   --t-bright: #ffffff;
-  --t-medium: #acacac;
-  --t-muted: #838383;
-  --t-muted-extra: #535151;
-  --t-opp-bright: #161616;
+  --t-medium: #cbd5e1;
+  --t-muted: #71829e;
+  --t-muted-extra: #3b4864;
+  --t-opp-bright: #ffffff;
 
-  /* Borders and Separators */
+  /* Borders & Hairlines */
   --st-bright: #ffffff;
-  --st-medium: #646464;
-  --st-muted: #252525;        /* Subtle 1px borders */
+  --st-medium: #475569;
+  --st-muted: rgba(2, 91, 221, 0.18);
   --st-opp-bright: #0f0f0f;
 
-  /* Shadows */
-  --shadow-card: 0 16px 48px -8px rgba(0, 0, 0, 0.65);
-  --shadow-accent: 0 12px 36px rgba(221, 241, 96, 0.28);
+  /* Elevation & Shadows */
+  --shadow-card: 0 16px 48px -8px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(2, 91, 221, 0.16);
+  --shadow-accent: 0 12px 36px rgba(2, 91, 221, 0.45);
 }
 
 /* --------------------------------------------------------------------------
@@ -95,10 +99,10 @@ body {
 
 ::selection {
   background-color: var(--accent);
-  color: var(--t-opp-bright);
+  color: #ffffff;
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -106,7 +110,7 @@ body {
   background: var(--base-shade);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: linear-gradient(180deg, var(--accent), var(--additional));
   border-radius: var(--_radius-s);
 }
 
@@ -187,7 +191,7 @@ a {
   gap: 1rem;
   font-family: var(--_font-accent);
   font-size: 1.6rem;
-  color: var(--accent);
+  color: var(--additional);
   text-transform: uppercase;
   letter-spacing: 0.08rem;
   margin-bottom: 1.6rem;
@@ -197,11 +201,11 @@ a {
   height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 /* --------------------------------------------------------------------------
-   5. BUTTONS & ROTATING BADGE (NITSAN STYLE)
+   5. BUTTONS & ROTATING BADGE (NITSAN STYLE IN BRAND BLUE)
    -------------------------------------------------------------------------- */
 .btn-anim {
   display: inline-flex;
@@ -220,15 +224,16 @@ a {
   overflow: hidden;
 }
 
-/* Accent Lime Button */
+/* Brand Royal Electric Blue Button */
 .btn-accent {
-  background-color: var(--accent);
-  color: var(--t-opp-bright);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--additional) 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(2, 91, 221, 0.35);
 }
 .btn-accent:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: var(--shadow-accent);
-  background-color: var(--accent-hover);
+  filter: brightness(1.1);
 }
 
 /* Ghost Button */
@@ -238,8 +243,8 @@ a {
   border: 1px solid var(--st-muted);
 }
 .btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--additional);
+  color: var(--additional);
   transform: translateY(-3px);
 }
 
@@ -280,14 +285,15 @@ a {
 .btn-rotating-center {
   width: 50px;
   height: 50px;
-  background: var(--accent);
-  color: var(--t-opp-bright);
+  background: linear-gradient(135deg, var(--accent), var(--additional));
+  color: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
   font-weight: 700;
+  box-shadow: 0 0 16px rgba(2, 91, 221, 0.4);
   transition: transform var(--_animspeed-medium) var(--_animbezier);
 }
 .btn-rotating-wrap:hover .btn-rotating-center {
@@ -313,7 +319,7 @@ a {
 }
 .mxd-header.scrolled {
   padding: 1.4rem 0;
-  background: rgba(22, 22, 22, 0.88);
+  background: rgba(8, 13, 26, 0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--st-muted);
 }
@@ -336,8 +342,9 @@ a {
   height: 44px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--st-muted);
-  background: #000;
+  border: 1px solid rgba(2, 91, 221, 0.3);
+  box-shadow: 0 0 14px rgba(2, 91, 221, 0.25);
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -366,9 +373,9 @@ a {
   font-family: var(--_font-default);
   padding: 2px 8px;
   border-radius: var(--_radius-s);
-  background: rgba(221, 241, 96, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(221, 241, 96, 0.3);
+  background: rgba(2, 91, 221, 0.15);
+  color: var(--additional);
+  border: 1px solid rgba(2, 91, 221, 0.35);
 }
 .brand-subtitle {
   font-size: 1.2rem;
@@ -401,7 +408,7 @@ a {
   left: 0;
   width: 0%;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--additional));
   transition: width var(--_animspeed-fast);
 }
 .nav-link:hover::after {
@@ -427,7 +434,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   7. HERO BANNER (NITSAN HERO PATTERN)
+   7. HERO BANNER (NITSAN HERO PATTERN IN BRAND BLUE)
    -------------------------------------------------------------------------- */
 .mxd-hero {
   position: relative;
@@ -437,8 +444,8 @@ a {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: radial-gradient(circle at 80% 20%, rgba(221, 241, 96, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(159, 139, 231, 0.05) 0%, transparent 50%);
+  background: radial-gradient(circle at 80% 20%, rgba(2, 91, 221, 0.12) 0%, transparent 55%),
+              radial-gradient(circle at 20% 80%, rgba(0, 162, 255, 0.08) 0%, transparent 55%);
 }
 
 .hero-grid {
@@ -466,12 +473,12 @@ a {
   justify-content: center;
   padding: 0.4rem 2.4rem;
   border-radius: var(--_radius-xl);
-  background: var(--accent);
-  color: var(--t-opp-bright);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--additional) 100%);
+  color: #ffffff;
   font-family: var(--_font-accent);
   font-weight: 700;
   vertical-align: middle;
-  box-shadow: var(--shadow-accent);
+  box-shadow: 0 0 25px rgba(2, 91, 221, 0.5);
   transition: transform var(--_animspeed-fast);
 }
 .hero-rotating-pill:hover {
@@ -509,7 +516,7 @@ a {
 .float-art-card {
   position: absolute;
   border-radius: var(--_radius-m);
-  background: rgba(28, 28, 30, 0.7);
+  background: rgba(14, 22, 40, 0.78);
   border: 1px solid var(--st-muted);
   backdrop-filter: blur(20px);
   padding: 2.8rem;
@@ -526,13 +533,14 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(32, 32, 36, 0.9), rgba(18, 18, 22, 0.95));
-  border-color: rgba(221, 241, 96, 0.25);
+  background: linear-gradient(135deg, rgba(16, 26, 48, 0.92), rgba(10, 16, 30, 0.96));
+  border-color: rgba(2, 91, 221, 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(2, 91, 221, 0.2);
 }
 .art-core .art-badge {
   font-size: 1.2rem;
   font-family: var(--font-mono);
-  color: var(--accent);
+  color: var(--additional);
   letter-spacing: 0.1rem;
 }
 .art-core .art-stat {
@@ -553,7 +561,7 @@ a {
   position: relative;
   overflow: hidden;
   border-radius: var(--_radius-s);
-  background: radial-gradient(circle at center, rgba(221, 241, 96, 0.12), transparent 70%);
+  background: radial-gradient(circle at center, rgba(2, 91, 221, 0.18), transparent 70%);
 }
 
 /* Art Piece 2: Floating 3D Star & AI Pill */
@@ -563,8 +571,9 @@ a {
   z-index: 3;
   padding: 1.8rem 2.6rem;
   border-radius: var(--_radius-xl);
-  background: rgba(26, 26, 30, 0.85);
-  border-color: rgba(159, 139, 231, 0.35);
+  background: rgba(16, 24, 44, 0.9);
+  border-color: rgba(0, 162, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 162, 255, 0.2);
   display: flex;
   align-items: center;
   gap: 1.4rem;
@@ -572,7 +581,7 @@ a {
 .art-star-icon {
   font-size: 2.8rem;
   color: var(--additional);
-  filter: drop-shadow(0 0 12px var(--additional));
+  filter: drop-shadow(0 0 14px var(--additional));
   animation: pulseStar 3s infinite ease-in-out;
 }
 @keyframes pulseStar {
@@ -593,7 +602,7 @@ a {
   z-index: 3;
   padding: 2rem 2.4rem;
   border-radius: var(--_radius-m);
-  background: rgba(22, 22, 26, 0.9);
+  background: rgba(14, 20, 36, 0.92);
   border-color: var(--st-muted);
 }
 .chip-header {
@@ -606,7 +615,7 @@ a {
   font-family: var(--_font-accent);
   font-size: 2.6rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--additional);
 }
 
 /* --------------------------------------------------------------------------
@@ -641,9 +650,9 @@ a {
 }
 
 .stack-card:nth-child(1) { top: 100px; z-index: 1; }
-.stack-card:nth-child(2) { top: 125px; z-index: 2; background: #19191d; }
-.stack-card:nth-child(3) { top: 150px; z-index: 3; background: #1c1c22; }
-.stack-card:nth-child(4) { top: 175px; z-index: 4; background: #202028; }
+.stack-card:nth-child(2) { top: 125px; z-index: 2; background: #0f182c; }
+.stack-card:nth-child(3) { top: 150px; z-index: 3; background: #121c33; }
+.stack-card:nth-child(4) { top: 175px; z-index: 4; background: #15223c; }
 
 .stack-card-left {
   display: flex;
@@ -653,7 +662,7 @@ a {
 .stack-card-cat {
   font-family: var(--font-mono);
   font-size: 1.3rem;
-  color: var(--accent);
+  color: var(--additional);
   letter-spacing: 0.12rem;
   text-transform: uppercase;
 }
@@ -681,21 +690,22 @@ a {
   font-family: var(--_font-accent);
   font-size: 1.3rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(2, 91, 221, 0.1);
+  border: 1px solid rgba(2, 91, 221, 0.22);
   color: var(--t-bright);
   transition: all var(--_animspeed-fast);
 }
 .tag-pill:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--additional);
+  color: var(--additional);
+  background: rgba(0, 162, 255, 0.15);
 }
 
 /* Stack Card Right: 3D Artwork Frame */
 .stack-card-right {
   height: 380px;
   border-radius: var(--_radius-m);
-  background: radial-gradient(circle at center, rgba(221, 241, 96, 0.08), rgba(10, 10, 12, 0.95));
+  background: radial-gradient(circle at center, rgba(2, 91, 221, 0.18), rgba(6, 10, 20, 0.95));
   border: 1px solid var(--st-muted);
   display: flex;
   flex-direction: column;
@@ -711,7 +721,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   9. VELOCITY MARQUEE SLIDER (NITSAN STYLE)
+   9. VELOCITY MARQUEE SLIDER (NITSAN STYLE IN BRAND BLUE)
    -------------------------------------------------------------------------- */
 .mxd-marquee-section {
   width: 100vw;
@@ -757,7 +767,8 @@ a {
 }
 .marquee-star {
   font-size: 3.2rem;
-  color: var(--accent);
+  color: var(--additional);
+  filter: drop-shadow(0 0 10px rgba(0, 162, 255, 0.6));
 }
 
 @keyframes marqueeScroll {
@@ -789,7 +800,8 @@ a {
 }
 .service-card:hover {
   transform: translateY(-8px);
-  border-color: var(--accent);
+  border-color: var(--additional);
+  box-shadow: 0 20px 50px rgba(2, 91, 221, 0.2);
 }
 .service-card::after {
   content: '';
@@ -798,7 +810,7 @@ a {
   right: 0;
   width: 140px;
   height: 140px;
-  background: radial-gradient(circle, rgba(221, 241, 96, 0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(2, 91, 221, 0.16), transparent 70%);
   pointer-events: none;
 }
 
@@ -810,18 +822,19 @@ a {
 .service-num {
   font-family: var(--font-mono);
   font-size: 1.4rem;
-  color: var(--accent);
+  color: var(--additional);
 }
 .service-icon-circle {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(2, 91, 221, 0.15);
+  border: 1px solid rgba(2, 91, 221, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-  color: var(--t-bright);
+  color: var(--additional);
 }
 
 .service-title {
@@ -871,12 +884,13 @@ a {
 }
 .case-card:hover {
   transform: translateY(-8px);
-  border-color: var(--accent);
+  border-color: var(--additional);
+  box-shadow: 0 20px 50px rgba(2, 91, 221, 0.25);
 }
 
 .case-visual-box {
   height: 240px;
-  background: linear-gradient(135deg, #1f1f26, #121216);
+  background: linear-gradient(135deg, #131c33, #0a1120);
   padding: 3rem;
   display: flex;
   flex-direction: column;
@@ -887,7 +901,7 @@ a {
 .case-client-tag {
   font-family: var(--font-mono);
   font-size: 1.2rem;
-  color: var(--accent);
+  color: var(--additional);
   letter-spacing: 0.1rem;
 }
 .case-stat-badge {
@@ -942,7 +956,7 @@ a {
   letter-spacing: -0.06rem;
 }
 .counter-num .accent {
-  color: var(--accent);
+  color: var(--additional);
 }
 .counter-desc {
   font-size: 1.7rem;
@@ -952,7 +966,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   13. TACTILE CAPITAL YIELD ENGINE (MINIMALIST NITSAN STYLE)
+   13. TACTILE CAPITAL YIELD ENGINE (IN MTR BRAND BLUE)
    -------------------------------------------------------------------------- */
 .yield-console-wrapper {
   background: var(--base-tint);
@@ -990,7 +1004,7 @@ a {
   font-family: var(--font-mono);
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--additional);
 }
 
 .custom-range {
@@ -1007,8 +1021,8 @@ a {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 16px rgba(221, 241, 96, 0.6);
+  background: linear-gradient(135deg, var(--accent), var(--additional));
+  box-shadow: 0 0 18px rgba(2, 91, 221, 0.7);
   cursor: pointer;
   transition: transform var(--_animspeed-fast);
 }
@@ -1017,7 +1031,7 @@ a {
 }
 
 .yield-result-panel {
-  background: #111113;
+  background: #09101f;
   border: 1px solid var(--st-muted);
   border-radius: var(--_radius-m);
   padding: 4rem;
@@ -1035,7 +1049,7 @@ a {
   font-family: var(--_font-accent);
   font-size: clamp(4rem, 5.5vw, 6rem);
   font-weight: 800;
-  color: var(--accent);
+  color: var(--additional);
   line-height: 1;
 }
 
@@ -1064,7 +1078,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   14. CTA SECTION (NITSAN WHERE DOES AI FIT PATTERN)
+   14. CTA SECTION (NITSAN EXACT PATTERN IN BRAND BLUE)
    -------------------------------------------------------------------------- */
 .mxd-cta-section {
   position: relative;
@@ -1072,7 +1086,7 @@ a {
 }
 
 .cta-banner-box {
-  background: linear-gradient(135deg, #1c1c22 0%, #161616 100%);
+  background: linear-gradient(135deg, #101930 0%, #080d1a 100%);
   border: 1px solid var(--st-muted);
   border-radius: var(--_radius-l);
   padding: 8rem 6rem;
@@ -1083,6 +1097,7 @@ a {
   align-items: center;
   text-align: center;
   gap: 3.2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
 }
 .cta-banner-box::before {
   content: '';
@@ -1092,7 +1107,7 @@ a {
   transform: translateX(-50%);
   width: 500px;
   height: 250px;
-  background: radial-gradient(ellipse, rgba(221, 241, 96, 0.15), transparent 70%);
+  background: radial-gradient(ellipse, rgba(2, 91, 221, 0.25), transparent 70%);
   pointer-events: none;
 }
 
@@ -1109,7 +1124,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   15. GLOBAL DESKS & HOME FOOTER (NITSAN HOME FOOTER)
+   15. GLOBAL DESKS & HOME FOOTER
    -------------------------------------------------------------------------- */
 .mxd-footer {
   background: var(--base-shade);
@@ -1153,7 +1168,7 @@ a {
   transition: color var(--_animspeed-fast);
 }
 .footer-links a:hover {
-  color: var(--accent);
+  color: var(--additional);
 }
 
 /* Global Desks Addresses */

@@ -114,6 +114,20 @@ body {
   border-radius: var(--_radius-s);
 }
 
+/* Top Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--additional) 50%, #38bdf8 100%);
+  z-index: 1100;
+  box-shadow: 0 0 12px rgba(0, 162, 255, 0.85);
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+}
+
 /* --------------------------------------------------------------------------
    3. TYPOGRAPHY (FUNNEL DISPLAY & FUNNEL SANS)
    -------------------------------------------------------------------------- */
@@ -735,6 +749,8 @@ a {
   border-top: 1px solid var(--st-muted);
   border-bottom: 1px solid var(--st-muted);
   background: var(--base-shade);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, transparent 100%);
 }
 
 .marquee-track {
@@ -794,9 +810,27 @@ a {
   flex-direction: column;
   justify-content: space-between;
   gap: 3.2rem;
-  transition: transform var(--_animspeed-medium) var(--_animbezier), border-color var(--_animspeed-medium);
+  transition: transform var(--_animspeed-medium) var(--_animbezier), border-color var(--_animspeed-medium), box-shadow var(--_animspeed-medium);
   position: relative;
   overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(450px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(0, 162, 255, 0.14), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+.service-card:hover::before {
+  opacity: 1;
+}
+.service-card > * {
+  position: relative;
+  z-index: 2;
 }
 .service-card:hover {
   transform: translateY(-8px);
@@ -880,7 +914,26 @@ a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--_animspeed-medium) var(--_animbezier), border-color var(--_animspeed-medium);
+  transition: transform var(--_animspeed-medium) var(--_animbezier), border-color var(--_animspeed-medium), box-shadow var(--_animspeed-medium);
+  position: relative;
+}
+.case-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(450px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(0, 162, 255, 0.15), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+.case-card:hover::before {
+  opacity: 1;
+}
+.case-card > * {
+  position: relative;
+  z-index: 2;
 }
 .case-card:hover {
   transform: translateY(-8px);
@@ -982,8 +1035,51 @@ a {
 .yield-controls {
   display: flex;
   flex-direction: column;
-  gap: 3.6rem;
+  gap: 3.2rem;
 }
+
+/* Sector Presets */
+.sector-presets-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.sector-presets-label {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--t-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+}
+.sector-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.sector-pill-btn {
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--_radius-xl);
+  background: rgba(2, 91, 221, 0.08);
+  border: 1px solid rgba(2, 91, 221, 0.22);
+  color: var(--t-medium);
+  font-family: var(--_font-accent);
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--_animspeed-fast) ease;
+}
+.sector-pill-btn:hover {
+  background: rgba(2, 91, 221, 0.18);
+  border-color: var(--additional);
+  color: var(--t-bright);
+}
+.sector-pill-btn.active {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--additional) 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(2, 91, 221, 0.4);
+}
+
 .slider-group {
   display: flex;
   flex-direction: column;
@@ -1175,12 +1271,18 @@ a {
 .footer-address-group {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.2rem;
 }
 .address-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+}
+.address-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
 }
 .address-city {
   font-family: var(--_font-accent);
@@ -1194,6 +1296,32 @@ a {
   line-height: 1.4;
 }
 
+/* Live Operational Clock Tag */
+.live-clock-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--_radius-xl);
+  background: rgba(0, 162, 255, 0.08);
+  border: 1px solid rgba(0, 162, 255, 0.22);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--additional);
+}
+.live-clock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
 .footer-bottom-bar {
   display: flex;
   justify-content: space-between;
@@ -1205,6 +1333,176 @@ a {
   flex-wrap: wrap;
   gap: 2rem;
 }
+
+/* --------------------------------------------------------------------------
+   16. CONSULTATION MODAL (CONFIDENTIAL SOVEREIGN ALLOCATION)
+   -------------------------------------------------------------------------- */
+.mxd-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.mxd-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.mxd-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 7, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.mxd-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: #0d1527;
+  border: 1px solid rgba(2, 91, 221, 0.35);
+  border-radius: var(--_radius-m);
+  padding: 4.8rem 4rem;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(2, 91, 221, 0.25);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+  overflow: hidden;
+}
+.mxd-modal-overlay.active .mxd-modal-card {
+  transform: translateY(0) scale(1);
+}
+.mxd-modal-close {
+  position: absolute;
+  top: 2.4rem;
+  right: 2.4rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--st-muted);
+  color: var(--t-medium);
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--_animspeed-fast);
+}
+.mxd-modal-close:hover {
+  background: rgba(2, 91, 221, 0.3);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  margin-bottom: 3.2rem;
+}
+.modal-title {
+  font-size: 3.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+.modal-sub {
+  font-size: 1.5rem;
+  color: var(--t-muted);
+  line-height: 1.5;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
+}
+@media (max-width: 580px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.form-field label {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--t-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+}
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--_radius-s);
+  background: rgba(7, 11, 22, 0.85);
+  border: 1px solid var(--st-muted);
+  color: var(--t-bright);
+  font-family: var(--_font-default);
+  font-size: 1.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--additional);
+  box-shadow: 0 0 16px rgba(0, 162, 255, 0.25);
+}
+.form-field select option {
+  background: #0d1527;
+  color: #ffffff;
+}
+.modal-submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 1.6rem;
+  margin-top: 1rem;
+}
+
+.modal-success-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.6rem;
+  padding: 2rem 0;
+}
+.modal-success-state.active {
+  display: flex;
+}
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--additional));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: 0 0 25px rgba(2, 91, 221, 0.5);
+}
+.modal-success-state h4 {
+  font-size: 2.6rem;
+  color: var(--t-bright);
+}
+.modal-success-state p {
+  font-size: 1.5rem;
+  color: var(--t-medium);
+  line-height: 1.6;
+}
+
 
 /* --------------------------------------------------------------------------
    16. RESPONSIVE QUERIES

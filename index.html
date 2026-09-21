@@ -16,10 +16,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Funnel+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- MTR Brand Design System Stylesheet (Cache-Busted v12.0.0) -->
-  <link rel="stylesheet" href="css/styles.css?v=12.0.0">
+  <!-- MTR Brand Design System Stylesheet (Cache-Busted v13.0.0) -->
+  <link rel="stylesheet" href="css/styles.css?v=13.0.0">
 </head>
 <body>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 
   <!-- ==========================================================================
        HEADER & NAVIGATION (NITSAN STYLE)
@@ -51,10 +54,10 @@
 
         <!-- Right Action Button & Rotating Badge -->
         <div class="header-cta-group">
-          <a href="#contact" class="btn-anim btn-accent slide-right-up">
+          <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal" style="border:none;">
             <span>Say Hello</span>
             <span class="btn-icon">↗</span>
-          </a>
+          </button>
 
           <button class="mobile-menu-btn" aria-label="Toggle Menu">
             ☰
@@ -470,19 +473,19 @@
       <div class="mxd-container">
         <div class="mxd-counters-grid">
           <div class="counter-item">
-            <div class="counter-num">150<span class="accent">+</span></div>
+            <div class="counter-num"><span class="counter-val" data-target="150">0</span><span class="accent">+</span></div>
             <p class="counter-desc">Projects delivered, turning capital into real-world category leadership.</p>
           </div>
           <div class="counter-item">
-            <div class="counter-num">15<span class="accent">+</span></div>
+            <div class="counter-num"><span class="counter-val" data-target="15">0</span><span class="accent">+</span></div>
             <p class="counter-desc">Years of knowledge powering algorithmic innovation across continents.</p>
           </div>
           <div class="counter-item">
-            <div class="counter-num">40<span class="accent">+</span></div>
+            <div class="counter-num"><span class="counter-val" data-target="40">0</span><span class="accent">+</span></div>
             <p class="counter-desc">Skilled quantitative growth engineers and media buyers.</p>
           </div>
           <div class="counter-item">
-            <div class="counter-num">75<span class="accent">+</span></div>
+            <div class="counter-num"><span class="counter-val" data-target="75">0</span><span class="accent">+</span></div>
             <p class="counter-desc">Enterprise clients who trust us to deliver reliable revenue every time.</p>
           </div>
         </div>
@@ -507,6 +510,18 @@
 
         <div class="yield-console-wrapper">
           <div class="yield-controls">
+            <!-- Sector Benchmark Presets -->
+            <div class="sector-presets-wrap">
+              <span class="sector-presets-label">Select Industry Benchmark</span>
+              <div class="sector-pills-row">
+                <button type="button" class="sector-pill-btn active" data-roas="5.4" data-name="All Sectors">All Sectors (5.4×)</button>
+                <button type="button" class="sector-pill-btn" data-roas="5.8" data-name="Luxury E-Commerce">Luxury E-Com (5.8×)</button>
+                <button type="button" class="sector-pill-btn" data-roas="6.2" data-name="B2B SaaS & Tech">B2B SaaS (6.2×)</button>
+                <button type="button" class="sector-pill-btn" data-roas="5.2" data-name="Cross-Border DTC">Cross-Border (5.2×)</button>
+                <button type="button" class="sector-pill-btn" data-roas="4.8" data-name="Wealth & FinTech">FinTech (4.8×)</button>
+              </div>
+            </div>
+
             <div class="slider-group">
               <div class="slider-label-row">
                 <span class="slider-label">Monthly Ad Spend Budget</span>
@@ -537,10 +552,10 @@
               </div>
             </div>
 
-            <a href="#contact" class="btn-anim btn-accent slide-right-up" style="justify-content: center; width: 100%;">
+            <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal" style="justify-content: center; width: 100%; border:none;">
               <span>Claim Sovereign Allocation</span>
               <span class="btn-icon">↗</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -561,10 +576,10 @@
             Partner with MTR to deploy high-conviction ad capital, monopolize AI search engines, and dominate international markets.
           </p>
 
-          <a href="mailto:contact@mtrdigital.com" class="btn-anim btn-accent slide-right-up" style="padding: 1.8rem 4.4rem; font-size: 2rem;">
+          <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal" style="padding: 1.8rem 4.4rem; font-size: 2rem; border:none;">
             <span>Contact Us</span>
             <span class="btn-icon">↗</span>
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -620,19 +635,43 @@
           <div class="footer-col-head">Global Desks</div>
           <div class="footer-address-group">
             <div class="address-item">
-              <span class="address-city">🇦🇪 Dubai (DIFC HQ)</span>
+              <div class="address-header-row">
+                <span class="address-city">🇦🇪 Dubai (DIFC HQ)</span>
+                <span class="live-clock-tag">
+                  <span class="live-clock-dot"></span>
+                  <span class="live-clock-time" data-tz="Asia/Dubai">--:--:-- GST</span>
+                </span>
+              </div>
               <span class="address-detail">Gate Precinct 4, Level 7, DIFC, UAE</span>
             </div>
             <div class="address-item">
-              <span class="address-city">🇬🇧 London (Mayfair)</span>
+              <div class="address-header-row">
+                <span class="address-city">🇬🇧 London (Mayfair)</span>
+                <span class="live-clock-tag">
+                  <span class="live-clock-dot"></span>
+                  <span class="live-clock-time" data-tz="Europe/London">--:--:-- BST</span>
+                </span>
+              </div>
               <span class="address-detail">14 Berkeley Square, Mayfair, London W1J</span>
             </div>
             <div class="address-item">
-              <span class="address-city">🇺🇸 New York (Hudson Yards)</span>
+              <div class="address-header-row">
+                <span class="address-city">🇺🇸 New York (Hudson Yards)</span>
+                <span class="live-clock-tag">
+                  <span class="live-clock-dot"></span>
+                  <span class="live-clock-time" data-tz="America/New_York">--:--:-- EDT</span>
+                </span>
+              </div>
               <span class="address-detail">30 Hudson Yards, Suite 5400, New York, NY</span>
             </div>
             <div class="address-item">
-              <span class="address-city">🇮🇳 Mumbai (BKC)</span>
+              <div class="address-header-row">
+                <span class="address-city">🇮🇳 Mumbai (BKC)</span>
+                <span class="live-clock-tag">
+                  <span class="live-clock-dot"></span>
+                  <span class="live-clock-time" data-tz="Asia/Kolkata">--:--:-- IST</span>
+                </span>
+              </div>
               <span class="address-detail">One BKC, G Block, Bandra Kurla Complex</span>
             </div>
           </div>
@@ -651,7 +690,73 @@
     </div>
   </footer>
 
-  <!-- MTR Interaction Script (Cache-Busted v12.0.0) -->
-  <script src="js/app.js?v=12.0.0"></script>
+  <!-- ==========================================================================
+       INTERACTIVE CONSULTATION MODAL (CONFIDENTIAL ALLOCATION)
+       ========================================================================== -->
+  <div class="mxd-modal-overlay" id="consultModal" aria-hidden="true">
+    <div class="mxd-modal-backdrop" id="modalBackdrop"></div>
+    <div class="mxd-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="mxd-modal-close" id="modalClose" aria-label="Close Consultation Window">✕</button>
+
+      <div class="modal-header">
+        <div class="mxd-subtitle-pill">
+          <span class="dot"></span>
+          <span>CONFIDENTIAL BRIEFING</span>
+        </div>
+        <h3 class="modal-title" id="modalTitle">Initiate Sovereign Allocation</h3>
+        <p class="modal-sub">
+          Direct access to MTR partner growth architects. Reserve your category dominance slot.
+        </p>
+      </div>
+
+      <form id="consultForm" class="modal-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="formName">Full Name</label>
+            <input type="text" id="formName" name="name" placeholder="Lord Alexander Sterling" required>
+          </div>
+          <div class="form-field">
+            <label for="formEmail">Corporate Email</label>
+            <input type="email" id="formEmail" name="email" placeholder="alexander@enterprise.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="formObjective">Strategic Growth Objective</label>
+            <select id="formObjective" name="objective">
+              <option value="capital">AI Paid Search & Social Capital Management</option>
+              <option value="aeo">Generative Engine Optimization (AEO/GEO Monopoly)</option>
+              <option value="cro">Conversion Rate Architecture (CRO & Neuromarketing)</option>
+              <option value="crossborder">Cross-Border International Expansion (GCC/US/EU)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="formSpend">Target Monthly Ad Spend</label>
+            <select id="formSpend" name="spend">
+              <option value="25k">$25,000 – $50,000 / month</option>
+              <option value="50k" selected>$50,000 – $100,000 / month</option>
+              <option value="100k">$100,000 – $250,000 / month</option>
+              <option value="250k+">$250,000+ / month (Enterprise)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-anim btn-accent slide-right-up modal-submit-btn">
+          <span>Transmit Confidential Brief</span>
+          <span class="btn-icon">↗</span>
+        </button>
+      </form>
+
+      <div class="modal-success-state" id="modalSuccessState">
+        <div class="success-icon">✓</div>
+        <h4>Brief Received by MTR Sovereign Desk</h4>
+        <p>Our Senior Growth Partner in your region (Dubai, London, NYC, or Mumbai) will review and transmit a customized deployment thesis within 4 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MTR Interaction Script (Cache-Busted v13.0.0) -->
+  <script src="js/app.js?v=13.0.0"></script>
 </body>
 </html>

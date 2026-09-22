@@ -9,14 +9,14 @@
    1. DESIGN TOKENS & BRAND VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* Typography */
-  --font-display: 'Funnel Display', sans-serif;
-  --font-sans: 'Funnel Sans', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  /* Typography: Plus Jakarta Sans (World-Class Modern Geometric Typography) */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --_size: 1.8rem;
-  --_font-default: var(--font-sans), sans-serif;
-  --_font-accent: var(--font-display), sans-serif;
+  --_font-default: var(--font-sans);
+  --_font-accent: var(--font-display);
 
   /* Corner Radii (Exact NITSAN Scale) */
   --_radius-s: 1rem;       /* 10px */
@@ -187,32 +187,35 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3. TYPOGRAPHY (FUNNEL DISPLAY & FUNNEL SANS)
+   3. TYPOGRAPHY (PLUS JAKARTA SANS DESIGN SYSTEM)
    -------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--_font-accent);
   color: var(--t-bright);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.04rem;
+  letter-spacing: -0.035em;
 }
 
-h1 { font-size: clamp(4.4rem, 7.5vw, 10.5rem); }
-h2 { font-size: clamp(3.2rem, 5.5vw, 7.2rem); }
-h3 { font-size: clamp(2.6rem, 3.8vw, 4.8rem); }
-h4 { font-size: clamp(2.2rem, 3vw, 3.6rem); }
-h5 { font-size: 2.4rem; }
-h6 { font-size: 2.0rem; }
+h1 { font-size: clamp(4.4rem, 7.2vw, 9.8rem); font-weight: 800; letter-spacing: -0.04em; }
+h2 { font-size: clamp(3.2rem, 5.2vw, 6.8rem); font-weight: 700; letter-spacing: -0.035em; }
+h3 { font-size: clamp(2.4rem, 3.6vw, 4.4rem); font-weight: 700; letter-spacing: -0.03em; }
+h4 { font-size: clamp(2.0rem, 2.8vw, 3.4rem); font-weight: 700; letter-spacing: -0.025em; }
+h5 { font-size: 2.2rem; font-weight: 600; }
+h6 { font-size: 1.9rem; font-weight: 600; }
 
 p {
+  font-family: var(--_font-default);
   font-size: 1.8rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--t-medium);
+  letter-spacing: -0.01em;
 }
 p.t-large {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   color: var(--t-bright);
-  line-height: 1.4;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
 }
 p.t-muted {
   color: var(--t-muted);
@@ -516,10 +519,11 @@ a {
   letter-spacing: 0.06rem;
 }
 .brand-subtitle {
-  font-family: var(--font-mono);
-  font-size: 1.0rem;
+  font-family: var(--_font-default);
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--t-muted);
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -746,9 +750,11 @@ a {
   color: var(--accent);
 }
 .mobile-brand-sub {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-family: var(--_font-default);
+  font-size: 1.0rem;
+  font-weight: 600;
   color: var(--t-muted);
+  letter-spacing: 0.04em;
 }
 .mobile-drawer-close {
   width: 36px;
@@ -800,10 +806,10 @@ a {
   transform: translateX(4px);
 }
 .mobile-nav-num {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--_font-default);
+  font-size: 1.2rem;
   color: var(--additional);
-  font-weight: 700;
+  font-weight: 800;
 }
 .mobile-nav-text {
   flex: 1;
@@ -964,20 +970,23 @@ a {
   box-shadow: var(--hero-art-shadow);
 }
 .art-core .art-badge {
-  font-size: 1.2rem;
-  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-family: var(--_font-default);
+  font-weight: 700;
   color: var(--additional);
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .art-core .art-stat {
   font-family: var(--_font-accent);
   font-size: 5rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--t-bright);
   line-height: 1;
 }
 .art-core .art-stat-label {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
+  font-weight: 500;
   color: var(--t-muted);
   margin-top: 6px;
 }
@@ -1025,7 +1034,7 @@ a {
 .art-star-text {
   font-family: var(--_font-accent);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--t-bright);
 }
 
@@ -1041,15 +1050,20 @@ a {
   box-shadow: var(--hero-art-shadow);
 }
 .chip-header {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--t-muted);
   margin-bottom: 6px;
 }
 .chip-val {
   font-family: var(--_font-accent);
   font-size: 2.6rem;
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--additional);
+}
   color: var(--additional);
 }
 
@@ -1099,10 +1113,11 @@ a {
   gap: 2.4rem;
 }
 .stack-card-cat {
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.3rem;
+  font-weight: 700;
   color: var(--additional);
-  letter-spacing: 0.12rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .stack-card-title {
@@ -1190,22 +1205,25 @@ a {
   width: 100%;
 }
 .telemetry-title {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-family: var(--_font-default);
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--t-muted);
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .telemetry-live-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.1rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
   color: #10b981;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: var(--_radius-xl);
 }
 .pulse-dot {
@@ -1235,9 +1253,11 @@ a {
   gap: 4px;
 }
 .t-lbl {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--t-muted);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .t-val {
@@ -1330,11 +1350,12 @@ a {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--t-bright);
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 .radar-node .node-dot {
   width: 9px;
@@ -1368,9 +1389,11 @@ a {
   gap: 4px;
 }
 .h-step {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--t-muted);
+  letter-spacing: 0.02em;
 }
 .h-bar {
   width: 100%;
@@ -1389,10 +1412,12 @@ a {
   background: linear-gradient(90deg, #10b981, #0084d6);
 }
 .h-metric {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--t-medium);
   text-align: right;
+  letter-spacing: 0.01em;
 }
 .h-metric.accent {
   color: var(--accent);
@@ -1435,9 +1460,11 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--t-muted);
+  letter-spacing: 0.02em;
 }
 .region-calc-box {
   background: var(--base-shade);
@@ -1454,8 +1481,11 @@ a {
   gap: 4px;
 }
 .r-k {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--t-muted);
 }
 .r-v {
@@ -1588,8 +1618,9 @@ a {
   align-items: flex-start;
 }
 .service-num {
-  font-family: var(--font-mono);
-  font-size: 1.4rem;
+  font-family: var(--_font-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--additional);
 }
 .service-icon-circle {
@@ -1623,10 +1654,10 @@ a {
   gap: 8px;
   padding: 4px 12px;
   border-radius: var(--_radius-xl);
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--_font-default);
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.06rem;
+  letter-spacing: 0.04em;
   transition: all var(--_animspeed-fast);
 }
 .spectrum-dot {
@@ -1780,10 +1811,20 @@ a {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.15), #080d1a);
 }
 .case-client-tag {
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.2rem;
+  font-weight: 700;
   color: var(--additional);
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.case-metric-tag {
+  font-family: var(--_font-default);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .case-stat-badge {
   font-family: var(--_font-accent);
@@ -1898,12 +1939,13 @@ a {
 .split-badge-tag {
   display: inline-block;
   align-self: flex-start;
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.15rem;
   font-weight: 700;
   padding: 0.4rem 1.4rem;
   border-radius: var(--_radius-s);
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   margin-bottom: 2rem;
 }
 .tag-before {
@@ -1944,8 +1986,9 @@ a {
   color: var(--accent);
 }
 .s-lbl {
-  font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-family: var(--_font-default);
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--t-muted);
 }
 .split-list-features {
@@ -2072,11 +2115,12 @@ a {
   gap: 1.2rem;
 }
 .sector-presets-label {
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.2rem;
+  font-weight: 600;
   color: var(--t-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.05em;
 }
 .sector-pills-row {
   display: flex;
@@ -2124,7 +2168,7 @@ a {
   color: var(--t-bright);
 }
 .slider-output-val {
-  font-family: var(--font-mono);
+  font-family: var(--_font-accent);
   font-size: 2.2rem;
   font-weight: 700;
   color: var(--additional);
@@ -2166,10 +2210,12 @@ a {
   gap: 2.8rem;
 }
 .result-big-title {
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.2rem;
+  font-weight: 600;
   color: var(--t-muted);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .result-big-num {
   font-family: var(--_font-accent);
@@ -2192,9 +2238,11 @@ a {
   gap: 4px;
 }
 .chip-name {
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.2rem;
+  font-weight: 600;
   color: var(--t-muted);
+  letter-spacing: 0.02em;
 }
 .chip-stat {
   font-family: var(--_font-accent);
@@ -2354,10 +2402,10 @@ a {
 }
 
 .address-detail {
-  font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-family: var(--_font-default);
+  font-size: 1.25rem;
   color: var(--t-muted);
-  line-height: 1.4;
+  line-height: 1.5;
   padding-left: 2.9rem;
 }
 
@@ -2370,9 +2418,10 @@ a {
   border-radius: var(--_radius-xl);
   background: rgba(2, 91, 221, 0.06);
   border: 1px solid rgba(2, 91, 221, 0.20);
-  font-family: var(--font-mono);
+  font-family: var(--_font-default);
   font-size: 1.15rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--additional);
   white-space: nowrap;
   flex-shrink: 0;
@@ -2534,11 +2583,12 @@ a {
   gap: 0.8rem;
 }
 .form-field label {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-family: var(--_font-default);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--t-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.05em;
 }
 .form-field input,
 .form-field select {

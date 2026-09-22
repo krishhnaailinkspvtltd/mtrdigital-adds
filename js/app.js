@@ -569,7 +569,7 @@
   }
 
   // ------------------------------------------------------------------------
-  // 8. GLOBAL DESKS LIVE OPERATIONAL CLOCKS (DXB, LON, NYC, BOM)
+  // 8. GLOBAL DESKS LIVE OPERATIONAL CLOCKS (DXB, LON, NYC, BOM) - 12-HR AM/PM
   // ------------------------------------------------------------------------
   const clockElements = document.querySelectorAll('.live-clock-time');
 
@@ -581,13 +581,23 @@
       if (!timeZone) return;
 
       try {
-        const formatter = new Intl.DateTimeFormat('en-GB', {
+        // Formatter for 12-hour format with AM/PM
+        const timeFormatter = new Intl.DateTimeFormat('en-US', {
           timeZone: timeZone,
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit',
+          hour12: true
+        });
+
+        // Extract hour (24-hr) to determine operational status (9 AM - 6 PM)
+        const hourFormatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: timeZone,
+          hour: 'numeric',
           hour12: false
         });
+        const currentHour = parseInt(hourFormatter.format(now), 10);
+        const isOpen = currentHour >= 9 && currentHour < 18;
 
         // Timezone abbreviation suffix
         let tzAbbr = '';
@@ -596,7 +606,33 @@
         else if (timeZone === 'America/New_York') tzAbbr = 'NYC';
         else if (timeZone === 'Asia/Kolkata') tzAbbr = 'IST';
 
-        el.textContent = `${formatter.format(now)} ${tzAbbr}`;
+        // Clean formatted 12-hour time string: e.g. "04:26:54 PM"
+        const formattedTime = timeFormatter.format(now);
+        el.textContent = `${formattedTime} ${tzAbbr}`;
+
+        // Update desk operational status badge and dot
+        const parentTag = el.closest('.live-clock-tag');
+        if (parentTag) {
+          const dot = parentTag.querySelector('.live-clock-dot');
+          const statusBadge = parentTag.querySelector('.desk-status-badge');
+          if (isOpen) {
+            if (dot) {
+              dot.style.background = '#10b981';
+              dot.style.boxShadow = '0 0 8px #10b981';
+            }
+            if (statusBadge) statusBadge.textContent = 'OPEN';
+            parentTag.classList.add('desk-open');
+            parentTag.classList.remove('desk-night');
+          } else {
+            if (dot) {
+              dot.style.background = '#00a2ff';
+              dot.style.boxShadow = '0 0 8px rgba(0, 162, 255, 0.8)';
+            }
+            if (statusBadge) statusBadge.textContent = 'ON-CALL';
+            parentTag.classList.add('desk-night');
+            parentTag.classList.remove('desk-open');
+          }
+        }
       } catch (err) {
         // Fallback
       }

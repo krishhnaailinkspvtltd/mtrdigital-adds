@@ -2261,8 +2261,8 @@ a {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-  gap: 6rem;
+  grid-template-columns: 1.3fr 0.7fr 0.7fr 1.8fr;
+  gap: 5rem;
   margin-bottom: 8rem;
 }
 
@@ -2297,59 +2297,125 @@ a {
   color: var(--additional);
 }
 
-/* Global Desks Addresses */
+/* Global Sovereign Desks Cards */
 .footer-address-group {
   display: flex;
   flex-direction: column;
-  gap: 2.2rem;
+  gap: 1.4rem;
 }
 .address-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.8rem;
+  padding: 1.4rem 1.8rem;
+  border-radius: var(--_radius-m);
+  background: var(--base-tint);
+  border: 1px solid var(--st-muted);
+  transition: all var(--_animspeed-fast);
 }
+.address-item:hover {
+  border-color: rgba(2, 91, 221, 0.35);
+  box-shadow: 0 4px 18px rgba(2, 91, 221, 0.08);
+  transform: translateX(4px);
+}
+[data-theme="dark"] .address-item:hover {
+  border-color: rgba(0, 162, 255, 0.35);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+
 .address-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.address-city-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.city-flag-svg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  display: block;
 }
 .address-city {
   font-family: var(--_font-accent);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--t-bright);
-}
-.address-detail {
-  font-size: 1.3rem;
-  color: var(--t-muted);
-  line-height: 1.4;
+  white-space: nowrap;
 }
 
-/* Live Operational Clock Tag */
+.address-detail {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--t-muted);
+  line-height: 1.4;
+  padding-left: 2.9rem;
+}
+
+/* Live Operational Clock Tag (12-Hour AM/PM High Craft) */
 .live-clock-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.3rem 0.9rem;
+  gap: 0.7rem;
+  padding: 0.35rem 1.0rem;
   border-radius: var(--_radius-xl);
-  background: rgba(0, 162, 255, 0.08);
-  border: 1px solid rgba(0, 162, 255, 0.22);
+  background: rgba(2, 91, 221, 0.06);
+  border: 1px solid rgba(2, 91, 221, 0.20);
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--additional);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--_animspeed-fast);
 }
+[data-theme="dark"] .live-clock-tag {
+  background: rgba(0, 162, 255, 0.08);
+  border-color: rgba(0, 162, 255, 0.25);
+  color: #00f0ff;
+}
+
 .live-clock-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #10b981;
   box-shadow: 0 0 8px #10b981;
+  flex-shrink: 0;
   animation: pulseDot 2s infinite ease-in-out;
 }
+.desk-status-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+[data-theme="dark"] .desk-status-badge {
+  color: #10b981;
+}
+.live-clock-tag.desk-night .desk-status-badge {
+  background: rgba(0, 162, 255, 0.15);
+  color: #0084d6;
+}
+[data-theme="dark"] .live-clock-tag.desk-night .desk-status-badge {
+  color: #00f0ff;
+}
+
 @keyframes pulseDot {
   0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 0.55; }
 }
 
 .footer-bottom-bar {

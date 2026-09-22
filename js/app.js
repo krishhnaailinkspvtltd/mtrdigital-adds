@@ -228,6 +228,142 @@
   }
 
   // ------------------------------------------------------------------------
+  // 3B. HERO MULTI-COLOUR GENERATIVE HARMONIC ORB (CANVAS ENGINE)
+  // ------------------------------------------------------------------------
+  const orbCanvas = document.getElementById('artOrbCanvas');
+  if (orbCanvas) {
+    const ctx = orbCanvas.getContext('2d');
+    let width = 280;
+    let height = 140;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function resizeCanvas() {
+      const rect = orbCanvas.getBoundingClientRect();
+      width = rect.width || 280;
+      height = rect.height || 140;
+      orbCanvas.width = width * dpr;
+      orbCanvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Orbital particles
+    const microDust = Array.from({ length: 18 }, () => ({
+      x: (Math.random() - 0.5) * 160,
+      y: (Math.random() - 0.5) * 70,
+      radius: Math.random() * 1.5 + 0.5,
+      speed: Math.random() * 0.02 + 0.01,
+      angle: Math.random() * Math.PI * 2,
+      color: ['#00f0ff', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 5)]
+    }));
+
+    let orbAngle = 0;
+    function renderOrb() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      const cx = width / 2;
+      const cy = height / 2;
+      orbAngle += 0.018;
+
+      // 1. Central Prismatic Core Glow
+      const coreGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 55);
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      coreGrad.addColorStop(0, isDark ? 'rgba(2, 91, 221, 0.45)' : 'rgba(0, 162, 255, 0.28)');
+      coreGrad.addColorStop(0.5, isDark ? 'rgba(139, 92, 246, 0.22)' : 'rgba(139, 92, 246, 0.15)');
+      coreGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 55, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 2. Micro Prismatic Dust Stars
+      microDust.forEach(dust => {
+        dust.angle += dust.speed;
+        const dx = cx + Math.cos(dust.angle) * Math.abs(dust.x) * 0.7;
+        const dy = cy + Math.sin(dust.angle) * Math.abs(dust.y) * 0.6;
+        ctx.fillStyle = dust.color;
+        ctx.shadowColor = dust.color;
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(dx, dy, dust.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // Ring Draw Helper
+      function drawRing(rx, ry, rot, strokeGrad, beadColor, beadPhase) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(rot);
+
+        ctx.strokeStyle = strokeGrad;
+        ctx.lineWidth = 1.8;
+        ctx.shadowColor = beadColor;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Orbiting glowing satellite beads
+        const beadAngle = orbAngle * 1.5 + beadPhase;
+        const bx = Math.cos(beadAngle) * rx;
+        const by = Math.sin(beadAngle) * ry;
+
+        ctx.fillStyle = beadColor;
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(bx, by, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Opposite trailing bead
+        const bx2 = Math.cos(beadAngle + Math.PI) * rx;
+        const by2 = Math.sin(beadAngle + Math.PI) * ry;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(bx2, by2, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Ring 1: Electric Blue to Cyan
+      const grad1 = ctx.createLinearGradient(-90, -45, 90, 45);
+      grad1.addColorStop(0, '#025bdd');
+      grad1.addColorStop(1, '#00f0ff');
+      drawRing(92, 38, Math.sin(orbAngle * 0.4) * 0.35 - 0.2, grad1, '#00f0ff', 0);
+
+      // Ring 2: Quantum Violet to Magenta
+      const grad2 = ctx.createLinearGradient(-80, 40, 80, -40);
+      grad2.addColorStop(0, '#8b5cf6');
+      grad2.addColorStop(1, '#ec4899');
+      drawRing(76, 32, Math.cos(orbAngle * 0.5) * 0.45 + 0.6, grad2, '#ec4899', 2.1);
+
+      // Ring 3: Emerald to Sunset Amber
+      const grad3 = ctx.createLinearGradient(70, -35, -70, 35);
+      grad3.addColorStop(0, '#10b981');
+      grad3.addColorStop(1, '#f59e0b');
+      drawRing(60, 26, -Math.sin(orbAngle * 0.3) * 0.5 - 0.8, grad3, '#10b981', 4.2);
+
+      // Center Nucleus Diamond
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(orbAngle);
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 14;
+      ctx.beginPath();
+      ctx.rect(-3, -3, 6, 6);
+      ctx.fill();
+      ctx.restore();
+
+      requestAnimationFrame(renderOrb);
+    }
+    renderOrb();
+  }
+
+  // ------------------------------------------------------------------------
   // 4. BENTO CARDS MOUSE SPOTLIGHT SHEEN
   // ------------------------------------------------------------------------
   const spotlightCards = document.querySelectorAll('.service-card, .case-card');
@@ -670,6 +806,57 @@
           e.preventDefault();
           targetEl.scrollIntoView({ behavior: 'smooth' });
         }
+      }
+    });
+  });
+
+  // ------------------------------------------------------------------------
+  // 14. INTERACTIVE MULTI-COLOUR PRISMATIC SPARKLE PARTICLES
+  // ------------------------------------------------------------------------
+  const sparkPalette = [
+    '#00f0ff', '#025bdd', '#8b5cf6', '#ec4899',
+    '#10b981', '#f59e0b', '#38bdf8', '#fbbf24'
+  ];
+
+  function spawnSpark(x, y) {
+    const spark = document.createElement('span');
+    spark.className = 'prismatic-spark';
+    const color = sparkPalette[Math.floor(Math.random() * sparkPalette.length)];
+    const tx = (Math.random() - 0.5) * 50;
+    const ty = -20 - Math.random() * 35;
+    const size = Math.floor(Math.random() * 4) + 5; // 5-8px
+
+    spark.style.left = `${x}px`;
+    spark.style.top = `${y}px`;
+    spark.style.width = `${size}px`;
+    spark.style.height = `${size}px`;
+    spark.style.background = color;
+    spark.style.boxShadow = `0 0 10px ${color}`;
+    spark.style.setProperty('--tx', `${tx}px`);
+    spark.style.setProperty('--ty', `${ty}px`);
+
+    document.body.appendChild(spark);
+    setTimeout(() => {
+      spark.remove();
+    }, 850);
+  }
+
+  // Click burst
+  window.addEventListener('click', (e) => {
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => spawnSpark(e.clientX, e.clientY), i * 40);
+    }
+  });
+
+  // Throttled hover trail over interactive cards
+  let lastSparkTime = 0;
+  const interactiveCardSelector = '.service-card, .case-card, .stack-card, .btn-anim, .art-core';
+  document.querySelectorAll(interactiveCardSelector).forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const now = performance.now();
+      if (now - lastSparkTime > 90) {
+        lastSparkTime = now;
+        spawnSpark(e.clientX, e.clientY);
       }
     });
   });

@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Funnel+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- MTR Brand Design System Stylesheet (Cache-Busted v16.0.0) -->
-  <link rel="stylesheet" href="css/styles.css?v=16.0.0">
+  <!-- MTR Brand Design System Stylesheet (Cache-Busted v17.0.0) -->
+  <link rel="stylesheet" href="css/styles.css?v=17.0.0">
 </head>
 <body>
 
@@ -139,12 +139,7 @@
                 <div class="art-stat-label">Ad Capital Scaled Across 28 Markets</div>
               </div>
               <div class="art-visual-3d">
-                <svg viewBox="0 0 280 140" style="width:100%; height:100%;">
-                  <circle cx="140" cy="70" r="50" fill="none" stroke="#025bdd" stroke-width="2" stroke-dasharray="4 6" opacity="0.6"/>
-                  <circle cx="140" cy="70" r="30" fill="none" stroke="#00a2ff" stroke-width="2" opacity="0.8"/>
-                  <circle cx="140" cy="70" r="8" fill="#00a2ff"/>
-                  <line x1="20" y1="70" x2="260" y2="70" stroke="rgba(2,91,221,0.25)" stroke-width="1"/>
-                </svg>
+                <canvas id="artOrbCanvas" width="280" height="140" class="art-orb-canvas"></canvas>
               </div>
             </div>
 
@@ -203,9 +198,17 @@
               </div>
               <div class="telemetry-waveform-wrap">
                 <svg class="waveform-svg" viewBox="0 0 340 120" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="waveSpectral" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#025bdd"/>
+                      <stop offset="35%" stop-color="#00f0ff"/>
+                      <stop offset="70%" stop-color="#8b5cf6"/>
+                      <stop offset="100%" stop-color="#10b981"/>
+                    </linearGradient>
+                  </defs>
                   <path class="wave-grid-line" d="M 0 30 L 340 30 M 0 60 L 340 60 M 0 90 L 340 90" />
-                  <path class="wave-glow-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" />
-                  <path class="wave-main-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" />
+                  <path class="wave-glow-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" stroke="url(#waveSpectral)" />
+                  <path class="wave-main-path" d="M 0 95 Q 40 10, 85 70 T 170 30 T 255 85 T 340 15" stroke="url(#waveSpectral)" />
                 </svg>
               </div>
               <div class="telemetry-stat-row">
@@ -442,6 +445,10 @@
           <div class="service-card">
             <div class="service-top-group">
               <span class="service-num">01 // PAID MEDIA</span>
+              <div class="service-spectrum-tag tag-cyan-blue">
+                <span class="spectrum-dot"></span>
+                <span>NEURAL BIDDING</span>
+              </div>
               <div class="service-icon-circle">↗</div>
             </div>
             <div>
@@ -455,6 +462,10 @@
           <div class="service-card">
             <div class="service-top-group">
               <span class="service-num">02 // AEO SEARCH</span>
+              <div class="service-spectrum-tag tag-violet-magenta">
+                <span class="spectrum-dot"></span>
+                <span>LLM AUTHORITY</span>
+              </div>
               <div class="service-icon-circle">↗</div>
             </div>
             <div>
@@ -468,6 +479,10 @@
           <div class="service-card">
             <div class="service-top-group">
               <span class="service-num">03 // CONVERSION UX</span>
+              <div class="service-spectrum-tag tag-emerald-teal">
+                <span class="spectrum-dot"></span>
+                <span>NEUROMARKETING</span>
+              </div>
               <div class="service-icon-circle">↗</div>
             </div>
             <div>
@@ -481,6 +496,10 @@
           <div class="service-card">
             <div class="service-top-group">
               <span class="service-num">04 // GLOBAL DESKS</span>
+              <div class="service-spectrum-tag tag-sunset-amber">
+                <span class="spectrum-dot"></span>
+                <span>CROSS-BORDER</span>
+              </div>
               <div class="service-icon-circle">↗</div>
             </div>
             <div>
@@ -516,7 +535,28 @@
         <div class="case-grid">
           <!-- Case 1 -->
           <div class="case-card">
-            <div class="case-visual-box">
+            <div class="case-visual-box case-art-luxury">
+              <svg class="case-graphic-svg" viewBox="0 0 320 160">
+                <defs>
+                  <linearGradient id="luxuryGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f59e0b"/>
+                    <stop offset="50%" stop-color="#fbbf24"/>
+                    <stop offset="100%" stop-color="#d97706"/>
+                  </linearGradient>
+                  <linearGradient id="luxuryCobalt" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#025bdd"/>
+                    <stop offset="100%" stop-color="#00a2ff"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="160" cy="80" r="65" fill="none" stroke="url(#luxuryCobalt)" stroke-width="2" stroke-dasharray="4 6"/>
+                <circle cx="160" cy="80" r="45" fill="none" stroke="url(#luxuryGold)" stroke-width="1.5"/>
+                <circle cx="160" cy="80" r="24" fill="none" stroke="#00a2ff" stroke-width="1.5" stroke-dasharray="2 4"/>
+                <line x1="160" y1="80" x2="195" y2="50" stroke="url(#luxuryGold)" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="160" y1="80" x2="135" y2="110" stroke="#00a2ff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="160" cy="80" r="5" fill="#f59e0b"/>
+                <circle cx="210" cy="45" r="3.5" fill="#f59e0b"/>
+                <circle cx="110" cy="115" r="3.5" fill="#00a2ff"/>
+              </svg>
               <span class="case-client-tag">SWISS HAUTE HORLOGERIE // UAE & GCC</span>
               <div class="case-stat-badge">5.8× ROAS</div>
             </div>
@@ -533,7 +573,24 @@
 
           <!-- Case 2 -->
           <div class="case-card">
-            <div class="case-visual-box">
+            <div class="case-visual-box case-art-fintech">
+              <svg class="case-graphic-svg" viewBox="0 0 320 160">
+                <defs>
+                  <linearGradient id="quantumViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8b5cf6"/>
+                    <stop offset="50%" stop-color="#ec4899"/>
+                    <stop offset="100%" stop-color="#06b6d4"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 40 130 Q 110 30, 180 90 T 300 20" fill="none" stroke="url(#quantumViolet)" stroke-width="3"/>
+                <circle cx="40" cy="130" r="6" fill="#8b5cf6"/>
+                <circle cx="110" cy="40" r="8" fill="#ec4899"/>
+                <circle cx="180" cy="90" r="7" fill="#06b6d4"/>
+                <circle cx="250" cy="50" r="5" fill="#f43f5e"/>
+                <circle cx="300" cy="20" r="9" fill="#8b5cf6"/>
+                <line x1="110" y1="40" x2="250" y2="50" stroke="rgba(236,72,153,0.35)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <line x1="180" y1="90" x2="40" y2="130" stroke="rgba(6,182,212,0.35)" stroke-width="1.5" stroke-dasharray="3 3"/>
+              </svg>
               <span class="case-client-tag">ENTERPRISE FINTECH // NYC & LONDON</span>
               <div class="case-stat-badge">+412% ARR</div>
             </div>
@@ -550,7 +607,24 @@
 
           <!-- Case 3 -->
           <div class="case-card">
-            <div class="case-visual-box">
+            <div class="case-visual-box case-art-biotech">
+              <svg class="case-graphic-svg" viewBox="0 0 320 160">
+                <defs>
+                  <linearGradient id="biotechEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981"/>
+                    <stop offset="50%" stop-color="#06b6d4"/>
+                    <stop offset="100%" stop-color="#025bdd"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 40 80 Q 95 15, 150 80 T 260 80 T 310 35" fill="none" stroke="url(#biotechEmerald)" stroke-width="2.5"/>
+                <path d="M 40 80 Q 95 145, 150 80 T 260 80 T 310 125" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+                <circle cx="95" cy="48" r="6" fill="#10b981"/>
+                <circle cx="150" cy="80" r="8" fill="#06b6d4"/>
+                <circle cx="205" cy="112" r="6" fill="#10b981"/>
+                <circle cx="260" cy="80" r="7" fill="#025bdd"/>
+                <line x1="95" y1="48" x2="95" y2="112" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+                <line x1="205" y1="48" x2="205" y2="112" stroke="rgba(6,182,212,0.4)" stroke-width="1.5"/>
+              </svg>
               <span class="case-client-tag">D2C BIOTECH // GLOBAL EXPANSION</span>
               <div class="case-stat-badge">6.4× ROAS</div>
             </div>
@@ -951,7 +1025,7 @@
     </div>
   </div>
 
-  <!-- MTR Interaction Script (Cache-Busted v16.0.0) -->
-  <script src="js/app.js?v=16.0.0"></script>
+  <!-- MTR Interaction Script (Cache-Busted v17.0.0) -->
+  <script src="js/app.js?v=17.0.0"></script>
 </body>
 </html>

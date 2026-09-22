@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Funnel+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- MTR Brand Design System Stylesheet (Cache-Busted v17.0.0) -->
-  <link rel="stylesheet" href="css/styles.css?v=17.0.0">
+  <!-- MTR Brand Design System Stylesheet (Cache-Busted v18.0.0) -->
+  <link rel="stylesheet" href="css/styles.css?v=18.0.0">
 </head>
 <body>
 
@@ -28,55 +28,115 @@
        HEADER & NAVIGATION (NITSAN STYLE)
        ========================================================================== -->
   <header class="mxd-header" id="mainHeader">
-    <div class="mxd-container">
-      <div class="header-inner">
-        <!-- Brand Logo (Transparent & Highly Visible) -->
-        <a href="#hero" class="header-brand" aria-label="MTR Digital Marketing Agency">
-          <div class="brand-logo-frame">
-            <img src="assets/logo-mark-vibrant.png?v=14.0.0" alt="MTR Logo" class="brand-logo-img">
-          </div>
-          <div class="brand-divider"></div>
-          <div class="brand-name-wrap">
-            <div class="brand-title">
-              DIGITAL MARKETING <span class="badge">AGENCY</span>
-            </div>
-            <span class="brand-subtitle">National & International</span>
-          </div>
-        </a>
-
-        <!-- Center Nav Links -->
-        <nav class="header-nav" aria-label="Main Navigation">
-          <a href="#solutions" class="nav-link">Solutions</a>
-          <a href="#services" class="nav-link">Services</a>
-          <a href="#cases" class="nav-link">Case Studies</a>
-          <a href="#yield" class="nav-link">Yield Simulator</a>
-          <a href="#contact" class="nav-link">About</a>
-        </nav>
-
-        <!-- Right Action Button, Theme Switcher & Mobile Trigger -->
-        <div class="header-cta-group">
-          <!-- Web Audio Micro-Haptics Sound Switcher -->
-          <button type="button" class="theme-toggle-btn" id="soundToggleBtn" aria-label="Toggle Audio Micro-Haptics" title="Toggle Audio Feedback">
-            <span id="soundToggleIcon">🔇</span>
-          </button>
-
-          <!-- Theme Switcher (Light / Dark Mode) -->
-          <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
-            <span id="themeToggleIcon">🌙</span>
-          </button>
-
-          <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal" style="border:none;">
-            <span>Say Hello</span>
-            <span class="btn-icon">↗</span>
-          </button>
-
-          <button class="mobile-menu-btn" aria-label="Toggle Menu">
-            ☰
-          </button>
+    <div class="header-inner">
+      <!-- Brand Logo (Transparent, Vibrant & Pristine MTR Title) -->
+      <a href="#hero" class="header-brand" aria-label="MTR Digital Marketing Agency">
+        <div class="brand-logo-frame">
+          <img src="assets/logo-mark-vibrant.png?v=18.0.0" alt="MTR Logo" class="brand-logo-img">
         </div>
+        <div class="brand-divider"></div>
+        <div class="brand-name-wrap">
+          <div class="brand-title">
+            <span class="brand-title-bold">MTR</span> <span class="brand-title-light">DIGITAL</span> <span class="badge">AGENCY</span>
+          </div>
+          <span class="brand-subtitle">National & International</span>
+        </div>
+      </a>
+
+      <!-- Center Nav Links in Refined Pill Container -->
+      <nav class="header-nav" aria-label="Main Navigation">
+        <a href="#solutions" class="nav-link"><span>Solutions</span></a>
+        <a href="#services" class="nav-link"><span>Services</span></a>
+        <a href="#cases" class="nav-link"><span>Case Studies</span></a>
+        <a href="#yield" class="nav-link"><span>Yield Simulator</span></a>
+        <a href="#contact" class="nav-link"><span>About</span></a>
+      </nav>
+
+      <!-- Right Action Button, Theme Switcher & Mobile Trigger -->
+      <div class="header-cta-group">
+        <!-- Web Audio Micro-Haptics Sound Switcher -->
+        <button type="button" class="header-icon-btn" id="soundToggleBtn" aria-label="Toggle Audio Micro-Haptics" title="Toggle Audio Feedback">
+          <span id="soundToggleIcon">🔇</span>
+        </button>
+
+        <!-- Theme Switcher (Light / Dark Mode) -->
+        <button type="button" class="header-icon-btn" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
+          <span id="themeToggleIcon">🌙</span>
+        </button>
+
+        <!-- Primary CTA Consultation Button -->
+        <button type="button" class="header-cta-btn open-consult-modal">
+          <span>Say Hello</span>
+          <span class="btn-icon">↗</span>
+        </button>
+
+        <!-- Sleek Animated Hamburger Menu Trigger -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer Overlay -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation Drawer" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <div class="mobile-brand-wrap">
+        <img src="assets/logo-mark-vibrant.png?v=18.0.0" alt="MTR Logo" class="mobile-logo-img">
+        <div class="mobile-brand-text">
+          <div class="mobile-brand-title"><strong>MTR</strong> DIGITAL</div>
+          <div class="mobile-brand-sub">National & International</div>
+        </div>
+      </div>
+      <button type="button" class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Menu">✕</button>
+    </div>
+
+    <nav class="mobile-drawer-nav">
+      <a href="#solutions" class="mobile-nav-link">
+        <span class="mobile-nav-num">01</span>
+        <span class="mobile-nav-text">Solutions</span>
+        <span class="mobile-nav-arrow">→</span>
+      </a>
+      <a href="#services" class="mobile-nav-link">
+        <span class="mobile-nav-num">02</span>
+        <span class="mobile-nav-text">Services</span>
+        <span class="mobile-nav-arrow">→</span>
+      </a>
+      <a href="#cases" class="mobile-nav-link">
+        <span class="mobile-nav-num">03</span>
+        <span class="mobile-nav-text">Case Studies</span>
+        <span class="mobile-nav-arrow">→</span>
+      </a>
+      <a href="#yield" class="mobile-nav-link">
+        <span class="mobile-nav-num">04</span>
+        <span class="mobile-nav-text">Yield Simulator</span>
+        <span class="mobile-nav-arrow">→</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link">
+        <span class="mobile-nav-num">05</span>
+        <span class="mobile-nav-text">About & Contact</span>
+        <span class="mobile-nav-arrow">→</span>
+      </a>
+    </nav>
+
+    <div class="mobile-drawer-footer">
+      <div class="mobile-controls-row">
+        <button type="button" class="mobile-tool-btn" id="mobileSoundToggle">
+          <span id="mobileSoundIcon">🔇</span> Sound
+        </button>
+        <button type="button" class="mobile-tool-btn" id="mobileThemeToggle">
+          <span id="mobileThemeIcon">🌙</span> Theme
+        </button>
+      </div>
+      <button type="button" class="btn-anim btn-accent slide-right-up open-consult-modal mobile-cta-full">
+        <span>Book Allocation Consultation</span>
+        <span class="btn-icon">↗</span>
+      </button>
+    </div>
+  </aside>
 
   <main>
     <!-- ==========================================================================
@@ -1025,7 +1085,7 @@
     </div>
   </div>
 
-  <!-- MTR Interaction Script (Cache-Busted v17.0.0) -->
-  <script src="js/app.js?v=17.0.0"></script>
+  <!-- MTR Interaction Script (Cache-Busted v18.0.0) -->
+  <script src="js/app.js?v=18.0.0"></script>
 </body>
 </html>

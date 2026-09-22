@@ -22,15 +22,17 @@
   // ------------------------------------------------------------------------
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeToggleIcon = document.getElementById('themeToggleIcon');
+  const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+  const mobileThemeIcon = document.getElementById('mobileThemeIcon');
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     try {
       localStorage.setItem('mtr-theme', theme);
     } catch (e) {}
-    if (themeToggleIcon) {
-      themeToggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
+    const icon = theme === 'dark' ? '☀️' : '🌙';
+    if (themeToggleIcon) themeToggleIcon.textContent = icon;
+    if (mobileThemeIcon) mobileThemeIcon.textContent = icon;
   }
 
   const savedTheme = (function () {
@@ -42,12 +44,13 @@
   })();
   applyTheme(savedTheme);
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      applyTheme(current === 'light' ? 'dark' : 'light');
-    });
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'light' ? 'dark' : 'light');
   }
+
+  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+  if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
 
   // ------------------------------------------------------------------------
   // 0B. WEB AUDIO API MICRO-HAPTIC AUDIO ENGINE
@@ -63,11 +66,13 @@
 
   const soundToggleBtn = document.getElementById('soundToggleBtn');
   const soundToggleIcon = document.getElementById('soundToggleIcon');
+  const mobileSoundToggle = document.getElementById('mobileSoundToggle');
+  const mobileSoundIcon = document.getElementById('mobileSoundIcon');
 
   function updateSoundIcon() {
-    if (soundToggleIcon) {
-      soundToggleIcon.textContent = soundEnabled ? '🔊' : '🔇';
-    }
+    const icon = soundEnabled ? '🔊' : '🔇';
+    if (soundToggleIcon) soundToggleIcon.textContent = icon;
+    if (mobileSoundIcon) mobileSoundIcon.textContent = icon;
   }
   updateSoundIcon();
 
@@ -93,18 +98,19 @@
     } catch (e) {}
   }
 
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      try {
-        localStorage.setItem('mtr-sound', soundEnabled ? 'true' : 'false');
-      } catch (e) {}
-      updateSoundIcon();
-      if (soundEnabled) {
-        playMicroHaptic(1200, 0.04);
-      }
-    });
+  function toggleSound() {
+    soundEnabled = !soundEnabled;
+    try {
+      localStorage.setItem('mtr-sound', soundEnabled ? 'true' : 'false');
+    } catch (e) {}
+    updateSoundIcon();
+    if (soundEnabled) {
+      playMicroHaptic(1200, 0.04);
+    }
   }
+
+  if (soundToggleBtn) soundToggleBtn.addEventListener('click', toggleSound);
+  if (mobileSoundToggle) mobileSoundToggle.addEventListener('click', toggleSound);
 
   // Hook micro-haptics to interactive clicks
   document.addEventListener('click', (e) => {
@@ -119,7 +125,7 @@
   const header = document.getElementById('mainHeader');
   const progressBar = document.getElementById('scrollProgressBar');
   const sections = document.querySelectorAll('main section[id]');
-  const navLinks = document.querySelectorAll('.header-nav .nav-link');
+  const navLinks = document.querySelectorAll('.header-nav .nav-link, .mobile-nav-link');
 
   function handleScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
@@ -127,7 +133,7 @@
 
     // Header dynamic island state
     if (header) {
-      if (scrollY > 50) {
+      if (scrollY > 40) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
@@ -159,6 +165,74 @@
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
+
+  // ------------------------------------------------------------------------
+  // 1B. MOBILE NAVIGATION DRAWER CONTROLLER
+  // ------------------------------------------------------------------------
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+  const mobileDrawerBackdrop = document.getElementById('mobileDrawerBackdrop');
+  const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function openMobileDrawer() {
+    if (mobileNavDrawer && mobileDrawerBackdrop) {
+      mobileNavDrawer.classList.add('open');
+      mobileDrawerBackdrop.classList.add('active');
+      mobileNavDrawer.setAttribute('aria-hidden', 'false');
+      if (mobileMenuBtn) {
+        mobileMenuBtn.classList.add('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      }
+      document.body.style.overflow = 'hidden';
+      playMicroHaptic(880, 0.03);
+    }
+  }
+
+  function closeMobileDrawer() {
+    if (mobileNavDrawer && mobileDrawerBackdrop) {
+      mobileNavDrawer.classList.remove('open');
+      mobileDrawerBackdrop.classList.remove('active');
+      mobileNavDrawer.setAttribute('aria-hidden', 'true');
+      if (mobileMenuBtn) {
+        mobileMenuBtn.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+      playMicroHaptic(660, 0.02);
+    }
+  }
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
+        closeMobileDrawer();
+      } else {
+        openMobileDrawer();
+      }
+    });
+  }
+
+  if (mobileDrawerClose) {
+    mobileDrawerClose.addEventListener('click', closeMobileDrawer);
+  }
+
+  if (mobileDrawerBackdrop) {
+    mobileDrawerBackdrop.addEventListener('click', closeMobileDrawer);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNavDrawer && mobileNavDrawer.classList.contains('open')) {
+      closeMobileDrawer();
+    }
+  });
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileDrawer();
+    });
+  });
 
   // ------------------------------------------------------------------------
   // 2. HERO ROTATING PILL TEXT (NITSAN MOTIF)
